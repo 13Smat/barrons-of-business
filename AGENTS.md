@@ -2,11 +2,13 @@
 
 Barons of Home Improvement is a multiplayer RTS: PvP and PvE retail war in the home improvement business. Andy Silver (GitHub `13Smat`) co-builds it with a friend. Each of them has their own bot, and both bots work in this repo. Read this file before planning or editing.
 
-The product is not specified in code yet. Current state is `docs/STATUS.md`. Accepted outcomes also get a record in `docs/adr/`. How the two humans and two bots work is the [Collaboration Rules](https://app.notion.com/p/424d7924246081bba4f1da68f94b4730) page. The shared hub is [Barons of Home Improvement](https://app.notion.com/p/424d792424608144935ddad53c435fc0).
+The product is not specified in code yet. Current state is `docs/STATUS.md`. Accepted outcomes also get a record in `docs/adr/`. How the two humans and two bots work is `docs/COLLABORATION.md`. That file is the source of truth.
 
 ## Stack
 
-The engine and stack are an open decision on the [Decisions](https://app.notion.com/p/424d7924246081569f07c9bd17646a0a) board: "Pick engine/stack" (Needs Both). Do not choose an engine, language, framework, host, or new dependency. Do not add game code that assumes one. `docs/adr/0001-record-decisions.md` records that process and leaves the stack open.
+The engine and stack are an open decision: [Decision: pick engine/stack](https://github.com/13Smat/barrons-of-business/issues/2). It is labeled `needs-decision`, `decide:both`, and `blocking`. Do not open a second issue for the same call.
+
+Do not choose an engine, language, framework, host, or new dependency. Do not add game code that assumes one. `docs/adr/0001-record-decisions.md` and `docs/adr/0002-github-issues.md` record the decision process and leave the stack open.
 
 ## Process
 
@@ -14,7 +16,7 @@ Andy's standing rules, adapted from `13Smat/Groundwork`:
 
 - One ticket, one agent, one branch, one PR.
 - Branch names are `<owner>/<ticket-slug>`, for example `andy/add-pause-menu` or `friend/load-level-1`. `setup/agent-rules` is the branch that added these rules.
-- Open a draft PR after the first meaningful commit. Put the link on the Game Task `Branch/PR` field.
+- Open a draft PR after the first meaningful commit. Link the ticket with `Closes #` in the PR body.
 - Keep going until CI is green. Mark the PR ready for review only after CI is green.
 - Small commits with meaningful messages.
 - Never force-push `main`. Never force-push a branch someone else might use.
@@ -26,7 +28,7 @@ Andy's standing rules, adapted from `13Smat/Groundwork`:
 - Read existing code first and match its conventions.
 - Explain the why in the PR: how to run and test it, what is risky, and what is out of scope. Use `.github/pull_request_template.md`.
 - Verify APIs and versions against docs or by running code.
-- Prefer boring, proven tools. A new dependency waits for a Decisions row (below).
+- Prefer boring, proven tools. A new dependency waits for a decision issue. See `docs/COLLABORATION.md`.
 
 ## Security
 
@@ -46,72 +48,20 @@ A fully specified one-line edit can stay in the chat. A feature, bug fix, refact
 
 ## Two humans, two bots
 
-### Tickets
+Read `docs/COLLABORATION.md` before you take work. In short:
 
-Each Game Task has one Owner, Andy or Friend. A bot works only its own human's tickets. Pick a task up when Owner is your human and Status is `Ready for Grok`. Leave every other row alone.
+- A ticket is a GitHub issue. The owner is the label `owner:andy` or `owner:friend`. You work only issues owned by your human.
+- You do not make the calls in that file on your own. Open a `Decision: ...` issue, then stop the blocked ticket.
+- Before you edit, check open `needs-decision` issues and your owner's `status:ready` issues. Open issues win over `docs/STATUS.md`.
 
-Status names on the [Game Tasks](https://app.notion.com/p/424d7924246081339308d7ebfb5713cf) board:
-
-| Transition | Who |
-| --- | --- |
-| Backlog to Ready for Grok | The owning human |
-| Ready for Grok to In Grok | That human's bot, when it starts |
-| In Grok to Review | That bot, when CI is green and the PR is ready for review |
-| Review to Done | A human, after merge |
-| Anything to Needs Decision | The bot, when a blocking decision is waiting |
-| Anything to Backlog | A human |
-
-### Folders
-
-Folder ownership is not decided. `.github/CODEOWNERS` is a commented placeholder. Do not invent paths or GitHub handles. Fill that file after a Decisions row names the folders and the friend's GitHub login.
-
-Shared interfaces, and any folder the other person owns, need the other side's OK before you edit them. OK means a Decisions comment from that human, or a ticket that already says both sides agreed.
-
-### Coordination
-
-Bots coordinate only in places both humans can see:
-
-- Notion ticket Handoff Notes
-- Notion Decision comments
-- GitHub PR comments
-
-Sign GitHub comments `🤖 (Andy's bot)` or `🤖 (Friend's bot)`. Slack or chat between bots is not a record. If a human decides something in chat, log it on the Decisions board.
-
-When you stop, write the ticket Handoff Notes as Done / Next / Blocked. If you stop before the ticket is finished, also leave `docs/handoff-template.md` filled in on the branch, and delete that copy when the ticket is done.
-
-Blocked on the other side: write `BLOCKED: <one line>` at the top of Handoff Notes, say what you need in a PR comment that @mentions the other human, and stop that ticket.
-
-### Decisions a bot must not make alone
-
-- Design pillars and scope
-- The other person's area, or a shared interface
-- A new dependency, or the engine
-- Art and asset licensing
-- Deleting or renaming something shared
-- A merge
-- Anything that costs money
-
-Log each one on the [Decisions](https://app.notion.com/p/424d7924246081569f07c9bd17646a0a) board with options and a recommendation. Set Needs to Andy, Friend, or Both. Comment on the row and @mention the people in Needs. Tell your own human in their chat. If the call blocks the ticket, tick Blocking and set the Game Task to `Needs Decision`. Then work on something else.
-
-Needs = Both means both humans agree in a comment. The human records Outcome and Decided On and sets Status to Decided. The bot then does the work and links the PR. Copy the outcome into `docs/adr/` from `docs/adr/0000-template.md`.
-
-A reversible implementation detail inside your human's own area can proceed. Log the notable ones as Decided rows so the other bot can see them.
-
-### Session start
-
-Before editing, check:
-
-- Decisions with Status Open
-- Game Tasks with Status `Needs Decision`
-
-The boards are linked above. `docs/STATUS.md` has the last snapshot a PR recorded. The boards win when they disagree.
+Folder ownership is not decided. Do not invent paths or GitHub handles. A shared interface, and any folder the other person owns, needs that human's OK on a decision issue or on the ticket.
 
 ## Status and handoff
 
 - Update `docs/STATUS.md` in each PR.
 - An ADR records a decision after humans have made it. Start from `docs/adr/0000-template.md`.
-- A handoff uses `docs/handoff-template.md` and the ticket's Handoff Notes.
-- An open design question is a Decisions row. Do not guess it in the PR.
+- A handoff uses `docs/handoff-template.md`, pasted as a comment on the ticket.
+- An open design question is a `Decision: ...` issue. Do not guess it in the PR.
 
 ## Commands
 

@@ -2,7 +2,7 @@
 
 ## Ticket
 
-<!-- Notion Game Task link -->
+Closes #
 
 ## Owner
 
@@ -19,13 +19,14 @@
 ## Checklist
 
 - [ ] One ticket, one branch (`andy/...` or `friend/...`), one PR
-- [ ] Draft opened early and linked on the Notion ticket
+- [ ] Draft opened after the first meaningful commit
+- [ ] PR body links the ticket with `Closes #`
 - [ ] CI is green (markdown lint and secret scan, plus any checks the decided stack added)
 - [ ] Bug fix includes a regression test or a lint rule, or this is not a bug fix
 - [ ] No secrets committed (`.env.example` placeholders only)
 - [ ] `docs/STATUS.md` updated
 - [ ] ADR added for an accepted decision, or no decision was accepted in this PR
-- [ ] Notion Handoff Notes updated
+- [ ] Handoff comment on the ticket uses `docs/handoff-template.md`
 
 ## Touches the other person's area?
 
@@ -35,7 +36,7 @@
 ## Needs a decision?
 
 - [ ] No
-- [ ] Yes. Decisions row (options, recommendation, people @mentioned):
+- [ ] Yes. Decision issue (options, recommendation, and the deciding humans mentioned):
 
 ## Authored by
 

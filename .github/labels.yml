@@ -1,0 +1,35 @@
+# Ticket and decision labels.
+# Sync with: python3 .github/scripts/sync-labels.py
+# The script creates or updates these labels. It does not delete other labels.
+
+- name: "needs-decision"
+  color: "d93f0b"
+  description: "A human call is needed; @mention who decides"
+
+- name: "decide:both"
+  color: "fbca04"
+  description: "Both humans must agree in a comment"
+
+- name: "blocking"
+  color: "b60205"
+  description: "Blocks other work until resolved"
+
+- name: "owner:andy"
+  color: "1d76db"
+  description: "Andy's ticket; Andy's bot works it"
+
+- name: "owner:friend"
+  color: "5319e7"
+  description: "Friend's ticket; friend's bot works it"
+
+- name: "status:ready"
+  color: "0e8a16"
+  description: "Ready for the owner's bot"
+
+- name: "status:in-progress"
+  color: "c2e0c6"
+  description: "Being worked"
+
+- name: "status:review"
+  color: "bfdadc"
+  description: "PR open, awaiting human review/merge"
