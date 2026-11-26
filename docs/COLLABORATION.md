@@ -1,6 +1,6 @@
 # Collaboration
 
-Andy Silver (GitHub login `13Smat`) builds Barons of Home Improvement with a friend. Each human has one bot. Both bots work in this repo. Humans merge. Bots do not.
+Andy Silver (GitHub login `13Smat`) builds Barons of Business with a friend. Each human has one bot. Both bots work in this repo. Humans merge. Bots do not.
 
 This file is the source of truth for how the humans and the bots work together. `AGENTS.md` is the agent entry point and points here.
 
