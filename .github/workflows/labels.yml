@@ -1,0 +1,49 @@
+name: Labels
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/labels.yml
+      - .github/scripts/sync-labels.py
+      - .github/workflows/labels.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  sync:
+    name: sync
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Sync labels
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 .github/scripts/sync-labels.py
+
+  # One-shot for this branch. Removed before merge. The agent token cannot
+  # create labels or edit issues. The Actions token can.
+  bootstrap:
+    name: bootstrap
+    runs-on: ubuntu-latest
+    needs: sync
+    if: github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Label issues and close the permission probe
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -eu
+          gh issue edit 2 --add-label "needs-decision,decide:both,blocking"
+          gh issue edit 4 --add-label "owner:andy,status:ready"
+          title="$(gh issue view 3 --json title --jq .title)"
+          if [ "$title" = "perm probe delete me" ]; then
+            gh issue close 3 --reason "not planned" --comment "Closed a permission probe from the GitHub-only process change. The setup ticket is #4."
+          fi

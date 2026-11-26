@@ -1,12 +1,12 @@
 # Handoff
 
-Leave this note when stopping before a ticket is done. Commit it on the ticket branch, or paste it on the draft PR. Delete it when the ticket is finished. Copy the same Done / Next / Blocked lines into the Notion ticket's Handoff Notes. Do not merge.
+Leave this note when you stop before a ticket is done. Paste it as a comment on the ticket. Commit a copy on the ticket branch, and delete that copy when the ticket is done. Do not merge the handoff file.
 
 ## Ticket
 
-- Name:
+- Title:
+- Number:
 - Owner:
-- Notion:
 
 ## Branch and PR
 
@@ -24,7 +24,7 @@ Leave this note when stopping before a ticket is done. Commit it on the ticket b
 
 ## Blocked
 
-Write `BLOCKED: <one line>` when the other side or a decision is in the way. Otherwise `no`.
+Write `BLOCKED: <one line>` when the other side or a decision is in the way. Otherwise write `no`.
 
 -
 
@@ -32,9 +32,9 @@ Write `BLOCKED: <one line>` when the other side or a decision is in the way. Oth
 
 -
 
-## Decisions
+## Decision
 
-Link the Decisions row. Do not guess an answer.
+Link the decision issue. Do not guess an answer.
 
 -
 

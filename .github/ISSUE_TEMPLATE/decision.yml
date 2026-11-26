@@ -1,0 +1,50 @@
+name: Decision
+description: A call a bot must not make alone.
+title: "Decision: "
+labels:
+  - "needs-decision"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This form adds the label `needs-decision`. After you open the issue, add who decides and whether it blocks work.
+
+        - Both: add `decide:both`.
+        - Andy: add `owner:andy`.
+        - Friend: add `owner:friend`.
+        - Blocking is Yes: add `blocking`.
+  - type: textarea
+    id: options
+    attributes:
+      label: Options
+      description: The real choices, with the cost of each.
+    validations:
+      required: true
+  - type: textarea
+    id: recommendation
+    attributes:
+      label: Recommendation
+      description: Which option you recommend, and why.
+    validations:
+      required: true
+  - type: dropdown
+    id: who-decides
+    attributes:
+      label: Who decides
+      description: Both means each human comments agreement.
+      options:
+        - Both
+        - Andy
+        - Friend
+    validations:
+      required: true
+  - type: dropdown
+    id: blocking
+    attributes:
+      label: Blocking
+      description: Yes when this decision stops other work.
+      options:
+        - "No"
+        - "Yes"
+    validations:
+      required: true
