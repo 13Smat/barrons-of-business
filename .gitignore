@@ -1,0 +1,19 @@
+# Secrets. .env.example is the only env file that belongs in git.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# OS and editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+*.log
+
+# Local tool caches
+.cache/
+
+# Engine-specific ignores wait on the open stack decision.
+# Add them in the PR that records that decision.
