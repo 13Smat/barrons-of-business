@@ -1,0 +1,40 @@
+name: Ticket
+description: Work for one owner, Andy or Friend.
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A ticket has one owner. After you open this issue, add one label: `owner:andy` or `owner:friend`.
+
+        Add `status:ready` when that human's bot may start. Add the human as assignee when their GitHub login is known.
+  - type: dropdown
+    id: owner
+    attributes:
+      label: Owner
+      description: Which human owns this ticket.
+      options:
+        - Andy
+        - Friend
+    validations:
+      required: true
+  - type: textarea
+    id: work
+    attributes:
+      label: What to do
+      description: The change this ticket asks for.
+    validations:
+      required: true
+  - type: textarea
+    id: done
+    attributes:
+      label: Done when
+      description: What is true when this ticket is finished.
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: Constraints, links, and anything the owner already decided.
+    validations:
+      required: false

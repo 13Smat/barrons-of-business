@@ -1,0 +1,29 @@
+name: Labels
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/labels.yml
+      - .github/scripts/sync-labels.py
+      - .github/workflows/labels.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  sync:
+    name: sync
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Sync labels
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 .github/scripts/sync-labels.py

@@ -6,12 +6,13 @@ Andy Silver (GitHub [13Smat](https://github.com/13Smat)) co-builds this with a f
 
 ## How to start
 
-There is no game to install or run. The engine and stack are an open decision on the Notion Decisions board, so this repo does not pick a runtime.
+There is no game to install or run. The engine and stack are an open decision, [Decision: pick engine/stack](https://github.com/13Smat/barrons-of-business/issues/2), so this repo does not pick a runtime.
 
 1. Read [AGENTS.md](AGENTS.md) before editing.
+2. Read [docs/COLLABORATION.md](docs/COLLABORATION.md).
 3. Run `/setup-pstack` once, before any other pstack work. pstack is vendored in [`.cursor/`](.cursor/skills/VENDOR.md).
 4. Use `/poteto-mode` for the work after that.
-5. Take a Game Task only when you are that ticket's owner and its status is Ready for Grok.
+5. Take an issue only when it has your human's owner label and `status:ready`.
 
 Copy `.env.example` to `.env` when a later decision names real services. `.env.example` is placeholders only. `.env` stays untracked.
 
@@ -24,5 +25,11 @@ npx --yes markdownlint-cli2
 gitleaks detect --source . --redact --no-banner --exit-code 1
 ```
 
+## Collaboration
+
+- [Collaboration rules](docs/COLLABORATION.md)
+- [Open issues](https://github.com/13Smat/barrons-of-business/issues)
+- [Current state](docs/STATUS.md)
+- [Decision records](docs/adr/README.md)
 
 Repo rules for agents: [AGENTS.md](AGENTS.md). Current state: [docs/STATUS.md](docs/STATUS.md).
